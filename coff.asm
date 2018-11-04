@@ -210,12 +210,18 @@ functionsymboltable:
 	push ecx
 	neg ecx
 	add ecx,FunctionInfoCount
-	invoke idxTransform,ecx,TYPE FunctionInfoproto
+	push ecx
+	invoke idxTransform,ecx,TYPE SymbolEntryproto
 	mov ecx,eax
 	mov ebx,4
 	push edx
 	mul ebx
 	pop edx
+	pop ecx
+	push eax
+	invoke idxTransform,ecx,TYPE FunctionInfoproto
+	mov ecx,eax
+	pop eax
 	;function def
 	lea esi,FunctionInfoTable[ecx].f_name
 	lea edi,FunctionSymbolTable[eax].n_name
